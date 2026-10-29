@@ -18,7 +18,12 @@ ARGS=(--concurrency=$CONC)
 [ "$LOW" = "--low" ] && ARGS+=(--scale=0.5)
 
 mkdir -p "$(dirname "$OUT")"
-npx remotion render src/index.ts Video "$OUT" "${ARGS[@]}"
+# Chrome sometimes fails to start within Remotion's fixed 25 s on shared CI runners; retry instead of failing the job.
+for attempt in 1 2 3; do
+  if npx remotion render src/index.ts Video "$OUT" "${ARGS[@]}"; then break; fi
+  [ "$attempt" = 3 ] && { echo "render failed after 3 attempts" >&2; exit 1; }
+  echo "render attempt $attempt failed, retrying in 5 s..." >&2; sleep 5
+done
 
 # Preview frames at 10%, 35%, 60%, 85% so you can look for cut-off text before sending the video.
 DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$OUT")
