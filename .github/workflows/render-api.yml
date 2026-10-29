@@ -1,0 +1,68 @@
+name: render-api
+# Started by the MCP server (workflow_dispatch). Renders captions + scenes with sound effects and publishes the MP4
+# as a GitHub release asset named render-<job_id>. The user's narration is mixed in afterwards, outside GitHub.
+run-name: render ${{ inputs.job_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: "Job id (a-z, 0-9, dash)"
+        required: true
+      payload:
+        description: "JSON: captions, scenes, options"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest   # 4 vCPU / 16 GB on a public repo
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+
+      - name: System packages (ffmpeg and Chromium libraries)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libnss3 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxrandr2 libxkbcommon0 libxfixes3 libxcomposite1 libxdamage1 libgbm1 libpango-1.0-0 libcairo2
+          sudo apt-get install -y -qq libasound2t64 || sudo apt-get install -y -qq libasound2
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/caption-to-video/work/node_modules
+          key: ctv-nm-${{ hashFiles('skill/assets/template/package.json') }}
+
+      - name: Prepare job
+        env:
+          JOB_ID: ${{ inputs.job_id }}
+          PAYLOAD: ${{ inputs.payload }}
+        run: python skill/scripts/prepare_api_job.py
+
+      - name: Render
+        env:
+          JOB_ID: ${{ inputs.job_id }}
+        run: |
+          mkdir -p out
+          python skill/scripts/build_video.py --job "jobs/$JOB_ID/job.json" --out "out/$JOB_ID.mp4" --work "$HOME/.cache/caption-to-video/work"
+
+      - name: Publish release
+        env:
+          JOB_ID: ${{ inputs.job_id }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 4 preview frames so the video can be checked without watching it
+          DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "out/$JOB_ID.mp4")
+          N=1; for P in 0.10 0.35 0.60 0.85; do
+            ffmpeg -v error -y -ss "$(python3 -c "print(round($DUR*$P,2))")" -i "out/$JOB_ID.mp4" -frames:v 1 -vf scale=960:-2 "out/$JOB_ID-p$N.png"; N=$((N+1))
+          done
+          gh release create "render-$JOB_ID" "out/$JOB_ID.mp4" out/"$JOB_ID"-p*.png --title "render $JOB_ID" --notes "Rendered by render-api"
+          # keep the repo tidy: delete renders older than 24 hours
+          CUT=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+          gh release list --limit 100 --json tagName,createdAt --jq ".[] | select(.createdAt < \"$CUT\" and (.tagName | startswith(\"render-\"))) | .tagName" | while read -r T; do gh release delete "$T" --cleanup-tag -y || true; done

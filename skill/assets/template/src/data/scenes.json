@@ -1,0 +1,20 @@
+{
+  "meta": { "title": "Hands-on AI Courses promo", "duration": 30, "aspect": "16:9", "theme": "light", "captions": "bar", "mascot": false, "audio": "audio.mp3" },
+  "scenes": [
+    { "id": "s1", "start": 0, "end": 4, "layout": "title", "eyebrow": "Hands-on courses", "title": "Learn AI by **building your own agent.**", "subtitle": "One small step at a time", "accent": "mint" },
+    { "id": "s2", "start": 4, "end": 9, "layout": "facts", "eyebrow": "Why courses let you down", "items": [
+      { "value": "~4%", "text": "of people who start an online course finish it" },
+      { "value": "2σ", "text": "better results with one-to-one teaching than a class" } ], "accent": "blue" },
+    { "id": "s3", "start": 9, "end": 15, "layout": "features", "eyebrow": "Our way", "title": "A **personal AI teacher** and a project that is yours", "items": [
+      { "icon": "graduation-cap", "title": "Teacher only yours", "text": "Your goal, your level, any hour", "anim": "wiggle" },
+      { "icon": "hammer", "title": "Step by step", "text": "Each lesson adds one working piece", "anim": "bounce" },
+      { "icon": "laptop", "title": "On your computer", "text": "You run it, break it, fix it", "anim": "float" } ], "accent": "pink" },
+    { "id": "s4", "start": 15, "end": 20, "layout": "logos", "eyebrow": "Lives inside the app you use", "title": "Connect in one click", "items": [
+      { "brand": "claude" }, { "brand": "cursor" }, { "brand": "python" }, { "brand": "github" } ], "accent": "blue" },
+    { "id": "s5", "start": 20, "end": 26, "layout": "table", "title": "Books and videos vs **Hands-on AI**", "head": ["", "The old way", "Hands-on AI"], "rows": [
+      ["Pace", "Fixed for everyone", "Set by you"],
+      ["Questions", "Wait for a forum reply", "Answered right away"],
+      ["You finish with", "Notes and a certificate", "Your own working project"] ] },
+    { "id": "s6", "start": 26, "end": 30, "layout": "outro", "title": "Stop watching. **Start building.**", "tagline": "Your first lesson takes about ten minutes.", "cta": "Start the first lesson" }
+  ]
+}

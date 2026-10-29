@@ -1,0 +1,29 @@
+name: deploy-mcp
+# Deploys mcp/worker.js to Cloudflare Workers (free tier). Needs these repository secrets:
+#   CLOUDFLARE_API_TOKEN  (template "Edit Cloudflare Workers"), CLOUDFLARE_ACCOUNT_ID,
+#   GH_PAT (fine-grained token for this repo: Actions read/write, Contents read/write), MCP_SECRET (long random string)
+on:
+  push:
+    branches: [main]
+    paths: ["mcp/**", "skill/SKILL.md", "skill/references/**", "skill/assets/channel-schema.json"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bundle the guide from the skill
+        run: python3 mcp/build_guide.py
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: mcp
+          command: deploy --var REPO:${{ github.repository }}
+          secrets: |
+            GH_PAT
+            MCP_SECRET
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          MCP_SECRET: ${{ secrets.MCP_SECRET }}

@@ -1,0 +1,427 @@
+{
+ "brands": [
+  "handson",
+  "channel"
+ ],
+ "layouts": {
+  "title": {
+   "req": [
+    "title"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ]
+  },
+  "bullets": {
+   "req": [
+    "items"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ],
+   "limit": [
+    "items",
+    5
+   ]
+  },
+  "logos": {
+   "req": [
+    "items"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ],
+   "limit": [
+    "items",
+    6
+   ]
+  },
+  "features": {
+   "req": [
+    "items"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ],
+   "limit": [
+    "items",
+    4
+   ]
+  },
+  "facts": {
+   "req": [
+    "items"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ],
+   "limit": [
+    "items",
+    3
+   ]
+  },
+  "table": {
+   "req": [
+    "head",
+    "rows"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ],
+   "limit": [
+    "rows",
+    5
+   ]
+  },
+  "stat": {
+   "req": [
+    "value",
+    "label"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ]
+  },
+  "quote": {
+   "req": [
+    "text"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ]
+  },
+  "code": {
+   "req": [
+    "code"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ]
+  },
+  "steps": {
+   "req": [
+    "steps"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ],
+   "limit": [
+    "steps",
+    6
+   ]
+  },
+  "compare": {
+   "req": [
+    "left",
+    "right"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ]
+  },
+  "outro": {
+   "req": [
+    "title",
+    "cta"
+   ],
+   "brands": [
+    "handson",
+    "channel"
+   ]
+  },
+  "equation": {
+   "req": [
+    "tex"
+   ],
+   "brands": [
+    "channel"
+   ]
+  },
+  "derivation": {
+   "req": [
+    "lines"
+   ],
+   "brands": [
+    "channel"
+   ],
+   "limit": [
+    "lines",
+    5
+   ]
+  },
+  "graph": {
+   "req": [
+    "series"
+   ],
+   "brands": [
+    "channel"
+   ],
+   "limit": [
+    "series",
+    4
+   ]
+  },
+  "freebody": {
+   "req": [
+    "forces"
+   ],
+   "brands": [
+    "channel"
+   ],
+   "limit": [
+    "forces",
+    6
+   ]
+  },
+  "quantity": {
+   "req": [
+    "name",
+    "value",
+    "unit"
+   ],
+   "brands": [
+    "channel"
+   ]
+  },
+  "units": {
+   "req": [
+    "rows"
+   ],
+   "brands": [
+    "channel"
+   ],
+   "limit": [
+    "rows",
+    6
+   ]
+  },
+  "question": {
+   "req": [
+    "question"
+   ],
+   "brands": [
+    "channel"
+   ]
+  },
+  "analogy": {
+   "req": [
+    "left",
+    "right"
+   ],
+   "brands": [
+    "channel"
+   ]
+  },
+  "timeline": {
+   "req": [
+    "events"
+   ],
+   "brands": [
+    "channel"
+   ],
+   "limit": [
+    "events",
+    4
+   ]
+  },
+  "sim": {
+   "req": [
+    "sim"
+   ],
+   "brands": [
+    "channel"
+   ]
+  }
+ },
+ "sims": {
+  "projectile": {
+   "v0": 20,
+   "angle": 45,
+   "g": 9.81,
+   "h0": 0,
+   "speed": 1
+  },
+  "pendulum": {
+   "length": 1,
+   "theta0": 40,
+   "damping": 0,
+   "g": 9.81,
+   "speed": 1
+  },
+  "spring": {
+   "m": 1,
+   "k": 4,
+   "c": 0.25,
+   "x0": 1,
+   "speed": 1
+  },
+  "incline": {
+   "angle": 30,
+   "mu": 0.2,
+   "m": 1,
+   "speed": 1
+  },
+  "collision": {
+   "m1": 2,
+   "m2": 1,
+   "v1": 3,
+   "v2": -1,
+   "e": 1,
+   "x1": -5,
+   "x2": 4,
+   "speed": 1
+  },
+  "orbit": {
+   "speed": 1,
+   "rate": 1
+  },
+  "wave": {
+   "mode": "travel",
+   "A": 1,
+   "wavelength": 4,
+   "freq": 0.5
+  },
+  "optics": {
+   "n1": 1,
+   "n2": 1.5,
+   "angle": 40,
+   "from": 40
+  },
+  "circuit": {
+   "V": 12,
+   "R1": 4,
+   "R2": 2,
+   "mode": "series"
+  },
+  "field": {
+   "q1": 1,
+   "q2": -1,
+   "d": 2.4
+  },
+  "gas": {
+   "n": 60,
+   "T": 1,
+   "T2": 1,
+   "seed": 7,
+   "speed": 1.6
+  }
+ },
+ "tex_commands": [
+  "alpha",
+  "beta",
+  "gamma",
+  "delta",
+  "epsilon",
+  "varepsilon",
+  "zeta",
+  "eta",
+  "theta",
+  "lambda",
+  "mu",
+  "nu",
+  "xi",
+  "pi",
+  "rho",
+  "sigma",
+  "tau",
+  "phi",
+  "varphi",
+  "chi",
+  "psi",
+  "omega",
+  "Gamma",
+  "Delta",
+  "Theta",
+  "Lambda",
+  "Xi",
+  "Pi",
+  "Sigma",
+  "Phi",
+  "Psi",
+  "Omega",
+  "cdot",
+  "times",
+  "pm",
+  "mp",
+  "approx",
+  "propto",
+  "neq",
+  "leq",
+  "geq",
+  "ll",
+  "gg",
+  "rightarrow",
+  "to",
+  "leftarrow",
+  "infty",
+  "partial",
+  "nabla",
+  "degree",
+  "circ",
+  "hbar",
+  "ell",
+  "int",
+  "sum",
+  "dots",
+  "div",
+  "frac",
+  "sqrt",
+  "vec",
+  "hat",
+  "bar",
+  "hl",
+  "text",
+  "mathrm",
+  "unit",
+  "quad",
+  "qquad",
+  "sin",
+  "cos",
+  "tan",
+  "ln",
+  "log",
+  "exp",
+  "max",
+  "min",
+  "lim"
+ ],
+ "color_keys": [
+  "force",
+  "velocity",
+  "accel",
+  "energy",
+  "field",
+  "positive",
+  "negative",
+  "mass",
+  "axis",
+  "grid",
+  "trace",
+  "pink",
+  "blue",
+  "lav",
+  "mint",
+  "sun",
+  "accent"
+ ],
+ "wave_modes": [
+  "travel",
+  "standing",
+  "superposition"
+ ],
+ "circuit_modes": [
+  "series",
+  "parallel"
+ ]
+}

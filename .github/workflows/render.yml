@@ -1,0 +1,86 @@
+name: render
+# Renders videos with the caption-to-video skill. A push that adds jobs/<id>/job.json starts a render;
+# the result is pushed to the branch result-<id> as video.mp4 (or error.log if the render failed).
+on:
+  push:
+    branches: [main]
+    paths: ["jobs/*/job.json"]
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "Job folder name under jobs/"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest   # 4 vCPU / 16 GB on a PUBLIC repo, 2 vCPU / 8 GB on a private one
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+
+      - name: Find jobs
+        id: find
+        env:
+          JOB_IN: ${{ inputs.job }}
+        run: |
+          if [ -n "$JOB_IN" ]; then JOBS="$JOB_IN"; else JOBS=$(git diff --name-only --diff-filter=A HEAD^ HEAD -- 'jobs/*/job.json' | cut -d/ -f2 | sort -u | tr '\n' ' '); fi
+          echo "jobs=$JOBS" >> "$GITHUB_OUTPUT"; echo "Jobs: $JOBS"
+
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+
+      - name: System packages (ffmpeg and Chromium libraries)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libnss3 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxrandr2 libxkbcommon0 libxfixes3 libxcomposite1 libxdamage1 libgbm1 libpango-1.0-0 libcairo2
+          sudo apt-get install -y -qq libasound2t64 || sudo apt-get install -y -qq libasound2
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/caption-to-video/work/node_modules
+          key: ctv-nm-${{ hashFiles('skill/assets/template/package.json') }}
+
+      - name: Render
+        id: render
+        if: steps.find.outputs.jobs != ''
+        run: |
+          mkdir -p out; FAILED=0
+          for J in ${{ steps.find.outputs.jobs }}; do
+            echo "::group::render $J"
+            python skill/scripts/build_video.py --job "jobs/$J/job.json" --out "out/$J.mp4" --work "$HOME/.cache/caption-to-video/work" 2>&1 | tee "out/$J.log"
+            [ "${PIPESTATUS[0]}" -ne 0 ] && FAILED=1 && echo "failed $J" >> out/failed.txt
+            echo "::endgroup::"
+          done
+          echo "failed=$FAILED" >> "$GITHUB_OUTPUT"
+
+      - name: Publish results to result-<id> branches
+        if: always() && steps.find.outputs.jobs != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for J in ${{ steps.find.outputs.jobs }}; do
+            rm -rf pub && mkdir pub && cd pub && git init -q -b "result-$J"
+            if [ -f "../out/$J.mp4" ]; then cp "../out/$J.mp4" video.mp4; else tail -n 200 "../out/$J.log" > error.log 2>/dev/null || echo "no log" > error.log; fi
+            git add -A && git -c user.name=render-bot -c user.email=bot@users.noreply.github.com commit -qm "result $J"
+            git push -f -q "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "result-$J"
+            cd ..
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: videos
+          path: out/*.mp4
+          retention-days: 3
+          if-no-files-found: ignore
+
+      - name: Fail the run if any render failed
+        if: steps.render.outputs.failed == '1'
+        run: exit 1

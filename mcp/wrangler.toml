@@ -1,0 +1,6 @@
+name = "video-farm-mcp"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+# REPO is passed at deploy time by .github/workflows/deploy-mcp.yml (--var REPO:owner/name).
+# GH_PAT and MCP_SECRET are Worker secrets set by the same workflow.

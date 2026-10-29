@@ -1,0 +1,38 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.0,
+    "text": "Learn AI by building your own agent.",
+    "id": 1
+  },
+  {
+    "start": 4.0,
+    "end": 9.0,
+    "text": "Books and videos leave you with notes, not something you built.",
+    "id": 2
+  },
+  {
+    "start": 9.0,
+    "end": 15.0,
+    "text": "Here, an AI teacher that is only yours guides you step by step.",
+    "id": 3
+  },
+  {
+    "start": 15.0,
+    "end": 20.0,
+    "text": "It lives inside the AI app you already use.",
+    "id": 4
+  },
+  {
+    "start": 20.0,
+    "end": 26.0,
+    "text": "Your pace, instant answers, and a project that really runs.",
+    "id": 5
+  },
+  {
+    "start": 26.0,
+    "end": 30.0,
+    "text": "Stop watching. Start building.",
+    "id": 6
+  }
+]

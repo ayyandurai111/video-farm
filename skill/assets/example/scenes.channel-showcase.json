@@ -1,0 +1,383 @@
+{
+ "meta": {
+  "title": "Channel showcase (physics)",
+  "duration": 121,
+  "aspect": "16:9",
+  "brandTheme": "channel",
+  "captions": "off",
+  "audience": "everyone"
+ },
+ "scenes": [
+  {
+   "id": "s1",
+   "start": 0,
+   "end": 4,
+   "layout": "title",
+   "eyebrow": "Physics in Tamil",
+   "title": "Projectile **motion**",
+   "subtitle": "How things fly",
+   "accent": "mint"
+  },
+  {
+   "id": "s2",
+   "start": 4,
+   "end": 8,
+   "layout": "question",
+   "question": "Why does a thrown ball **curve**?",
+   "answer": "Gravity pulls it down while it keeps moving forward"
+  },
+  {
+   "id": "s3",
+   "start": 8,
+   "end": 12,
+   "layout": "equation",
+   "eyebrow": "The idea",
+   "title": "Two motions, one path",
+   "tex": "y = x\\tan\\theta - \\frac{g x^2}{2 v_0^2 \\cos^2\\theta}",
+   "size": "l",
+   "note": "Sideways speed stays the same. Only the up-and-down speed changes."
+  },
+  {
+   "id": "s4",
+   "start": 12,
+   "end": 17,
+   "layout": "derivation",
+   "title": "Range of the throw",
+   "lines": [
+    {
+     "tex": "R = v_x \\, t",
+     "note": "sideways speed times time"
+    },
+    {
+     "tex": "t = \\frac{2 v_0 \\sin\\theta}{g}",
+     "note": "time in the air"
+    },
+    {
+     "tex": "R = \\frac{v_0^2 \\sin 2\\theta}{g}",
+     "note": "put them together"
+    }
+   ]
+  },
+  {
+   "id": "s5",
+   "start": 17,
+   "end": 23,
+   "layout": "sim",
+   "sim": "projectile",
+   "eyebrow": "Try it",
+   "title": "Throw it at 45 degrees",
+   "params": {
+    "v0": 22,
+    "angle": 45
+   },
+   "show": [
+    "range"
+   ],
+   "caption": "45° gives the longest range on flat ground."
+  },
+  {
+   "id": "s6",
+   "start": 23,
+   "end": 28,
+   "layout": "graph",
+   "eyebrow": "Height against time",
+   "title": "A parabola",
+   "xLabel": "Time (seconds)",
+   "yLabel": "Height (metres)",
+   "series": [
+    {
+     "label": "y",
+     "expr": "15*x - 4.905*x^2",
+     "color": "velocity",
+     "fill": true
+    }
+   ],
+   "xRange": [
+    0,
+    3
+   ],
+   "caption": "The area under the speed graph is the distance."
+  },
+  {
+   "id": "s7",
+   "start": 28,
+   "end": 33,
+   "layout": "freebody",
+   "eyebrow": "Forces",
+   "title": "Block on a table",
+   "body": "block",
+   "forces": [
+    {
+     "label": "\\text{Table pushes up}",
+     "angle": 90,
+     "mag": 10,
+     "color": "velocity"
+    },
+    {
+     "label": "\\text{Gravity}",
+     "angle": 270,
+     "mag": 10,
+     "color": "force"
+    },
+    {
+     "label": "\\text{Your push}",
+     "angle": 0,
+     "mag": 6,
+     "color": "accel"
+    },
+    {
+     "label": "\\text{Friction}",
+     "angle": 180,
+     "mag": 3,
+     "color": "energy"
+    }
+   ],
+   "net": false,
+   "caption": "Each arrow is one push or pull."
+  },
+  {
+   "id": "s8",
+   "start": 33,
+   "end": 39,
+   "layout": "sim",
+   "sim": "incline",
+   "title": "Sliding down a ramp",
+   "params": {
+    "angle": 32,
+    "mu": 0.15
+   }
+  },
+  {
+   "id": "s9",
+   "start": 39,
+   "end": 45,
+   "layout": "sim",
+   "sim": "pendulum",
+   "title": "A swinging pendulum",
+   "params": {
+    "length": 1.2,
+    "theta0": 50
+   },
+   "caption": "Watch kinetic and potential energy trade places."
+  },
+  {
+   "id": "s10",
+   "start": 45,
+   "end": 51,
+   "layout": "sim",
+   "sim": "spring",
+   "title": "Mass on a spring",
+   "params": {
+    "k": 6,
+    "c": 0.3
+   }
+  },
+  {
+   "id": "s11",
+   "start": 51,
+   "end": 56,
+   "layout": "sim",
+   "sim": "wave",
+   "title": "A travelling wave",
+   "params": {
+    "mode": "travel",
+    "wavelength": 4,
+    "freq": 0.5
+   }
+  },
+  {
+   "id": "s12",
+   "start": 56,
+   "end": 61,
+   "layout": "sim",
+   "sim": "wave",
+   "title": "Two waves add up",
+   "params": {
+    "mode": "superposition"
+   }
+  },
+  {
+   "id": "s13",
+   "start": 61,
+   "end": 67,
+   "layout": "sim",
+   "sim": "orbit",
+   "title": "A planet in orbit",
+   "params": {
+    "speed": 0.85
+   },
+   "caption": "Closer means faster."
+  },
+  {
+   "id": "s14",
+   "start": 67,
+   "end": 73,
+   "layout": "sim",
+   "sim": "collision",
+   "title": "Two blocks collide",
+   "params": {
+    "m1": 2,
+    "m2": 1,
+    "v1": 3,
+    "v2": -1,
+    "e": 1
+   }
+  },
+  {
+   "id": "s15",
+   "start": 73,
+   "end": 78,
+   "layout": "sim",
+   "sim": "circuit",
+   "title": "Resistors in series",
+   "params": {
+    "V": 12,
+    "R1": 4,
+    "R2": 2,
+    "mode": "series"
+   }
+  },
+  {
+   "id": "s16",
+   "start": 78,
+   "end": 83,
+   "layout": "sim",
+   "sim": "circuit",
+   "title": "Resistors in parallel",
+   "params": {
+    "V": 12,
+    "R1": 4,
+    "R2": 2,
+    "mode": "parallel"
+   }
+  },
+  {
+   "id": "s17",
+   "start": 83,
+   "end": 88,
+   "layout": "sim",
+   "sim": "optics",
+   "title": "Light bends",
+   "params": {
+    "from": 15,
+    "angle": 55,
+    "n2": 1.5
+   }
+  },
+  {
+   "id": "s18",
+   "start": 88,
+   "end": 93,
+   "layout": "sim",
+   "sim": "field",
+   "title": "Field of two charges",
+   "params": {
+    "q1": 1,
+    "q2": -1
+   }
+  },
+  {
+   "id": "s19",
+   "start": 93,
+   "end": 98,
+   "layout": "sim",
+   "sim": "gas",
+   "title": "Heat a gas",
+   "params": {
+    "T": 1,
+    "T2": 3.5
+   },
+   "caption": "Hotter means faster particles."
+  },
+  {
+   "id": "s20",
+   "start": 98,
+   "end": 102,
+   "layout": "quantity",
+   "eyebrow": "Remember",
+   "name": "Acceleration due to gravity",
+   "symbol": "g",
+   "value": "9.81",
+   "unit": "\\text{m/s}^2",
+   "note": "Near the surface of the Earth"
+  },
+  {
+   "id": "s21",
+   "start": 102,
+   "end": 107,
+   "layout": "units",
+   "title": "Units to know",
+   "rows": [
+    {
+     "name": "Force",
+     "symbol": "F",
+     "unit": "\\text{N} = \\text{kg m/s}^2"
+    },
+    {
+     "name": "Energy",
+     "symbol": "E",
+     "unit": "\\text{J} = \\text{N m}"
+    },
+    {
+     "name": "Power",
+     "symbol": "P",
+     "unit": "\\text{W} = \\text{J/s}"
+    },
+    {
+     "name": "Pressure",
+     "symbol": "p",
+     "unit": "\\text{Pa} = \\text{N/m}^2"
+    }
+   ]
+  },
+  {
+   "id": "s22",
+   "start": 107,
+   "end": 112,
+   "layout": "analogy",
+   "title": "Electric current is like water flow",
+   "left": {
+    "title": "Wire",
+    "text": "Charge flows",
+    "icon": "zap"
+   },
+   "right": {
+    "title": "Pipe",
+    "text": "Water flows",
+    "icon": "droplets"
+   },
+   "sign": "≈"
+  },
+  {
+   "id": "s23",
+   "start": 112,
+   "end": 117,
+   "layout": "timeline",
+   "title": "Who found what",
+   "events": [
+    {
+     "year": "1609",
+     "text": "Kepler: planets move in ellipses"
+    },
+    {
+     "year": "1687",
+     "text": "Newton: laws of motion and gravity"
+    },
+    {
+     "year": "1905",
+     "text": "Einstein: special relativity"
+    }
+   ]
+  },
+  {
+   "id": "s24",
+   "start": 117,
+   "end": 121,
+   "layout": "outro",
+   "title": "Now **you** try.",
+   "tagline": "More physics, every week.",
+   "cta": "Subscribe",
+   "url": "youtube.com/@yourchannel"
+  }
+ ]
+}

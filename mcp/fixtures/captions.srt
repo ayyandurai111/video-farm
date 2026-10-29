@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:04,000
+Learn AI by building your own agent.
+
+2
+00:00:04,000 --> 00:00:09,000
+Books and videos leave you with notes, not something you built.
+
+3
+00:00:09,000 --> 00:00:15,000
+Here, an AI teacher that is only yours guides you step by step.
+
+4
+00:00:15,000 --> 00:00:20,000
+It lives inside the AI app you already use.
+
+5
+00:00:20,000 --> 00:00:26,000
+Your pace, instant answers, and a project that really runs.
+
+6
+00:00:26,000 --> 00:00:30,000
+Stop watching. Start building.
